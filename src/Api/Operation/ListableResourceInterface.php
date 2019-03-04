@@ -29,15 +29,15 @@ interface ListableResourceInterface
      *
      * @return PageInterface if the request failed
      */
-    public function listPerPage(?SearchCriteria $searchCriteria): PageInterface;
+    public function listPerPage(?SearchCriteria $searchCriteria = null): PageInterface;
 
     /**
      * Gets a cursor to iterate over a list of resources.
      *
-     * @param int                 $limit          The limit of returning values. Do note that the server has a maximum limit allowed.
+     * @param int                 $limit The limit of returning values. Do note that the server has a maximum limit allowed.
      * @param SearchCriteria|null $searchCriteria
      *
      * @return ResourceCursorInterface
      */
-    public function all($limit = 100, ?SearchCriteria $searchCriteria): ResourceCursorInterface;
+    public function all($limit = 100, ?SearchCriteria $searchCriteria = null): ResourceCursorInterface;
 }

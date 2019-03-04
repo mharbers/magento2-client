@@ -69,7 +69,7 @@ class Page implements PageInterface
         $currentPage = $data['search_criteria']['current_page'] ?? 1;
         $currentSize = $data['search_criteria']['page_size'] ?? 10;
         $count = $data['total_count'] ?? 0;
-        $items = $data['items'];
+        $items = $data['items'] ?? [];
 
         $firstQuery = $currentQuery;
         $firstQuery['searchCriteria']['currentPage'] = 1;
