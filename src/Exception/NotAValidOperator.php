@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Eoko\Magento2\Client\Exception;
 
-use Eoko\Magento2\Client\Search\SearchItem;
+use Eoko\Magento2\Client\Search\SearchFilter;
 use Exception;
 use Throwable;
 
@@ -20,6 +20,6 @@ class NotAValidOperator extends Exception
 {
     public function __construct(string $operator = '', int $code = 0, Throwable $previous = null)
     {
-        parent::__construct($operator.' is not a valid operator. It must be one of these "'.join(SearchItem::$operators, '", "').'".', $code, $previous);
+        parent::__construct($operator.' is not a valid operator. It must be one of these "'.implode(SearchFilter::$operators, '", "').'".', $code, $previous);
     }
 }

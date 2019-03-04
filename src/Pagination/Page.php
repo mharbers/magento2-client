@@ -63,12 +63,12 @@ class Page implements PageInterface
         $parseUrl = parse_url($uri);
         parse_str($parseUrl['query'], $currentQuery);
 
-        $currentQuery['searchCriteria'] = isset($currentQuery['searchCriteria']) ? $currentQuery['searchCriteria'] : [];
+        $currentQuery['searchCriteria'] = $currentQuery['searchCriteria'] ?? [];
 
-        $data['search_criteria'] = isset($data['search_criteria']) ? $data['search_criteria'] : [];
-        $currentPage = isset($data['search_criteria']['current_page']) ? $data['search_criteria']['current_page'] : 1;
-        $currentSize = isset($data['search_criteria']['page_size']) ? $data['search_criteria']['page_size'] : 10;
-        $count = isset($data['total_count']) ? $data['total_count'] : 0;
+        $data['search_criteria'] = $data['search_criteria'] ?? [];
+        $currentPage = $data['search_criteria']['current_page'] ?? 1;
+        $currentSize = $data['search_criteria']['page_size'] ?? 10;
+        $count = $data['total_count'] ?? 0;
         $items = $data['items'];
 
         $firstQuery = $currentQuery;
@@ -219,15 +219,15 @@ class Page implements PageInterface
      *
      * @todo fix dirty
      */
-    private function unparseUrl($parsedUrl)
+    private function unparseUrl($parsedUrl): string
     {
         $scheme = isset($parsedUrl['scheme']) ? $parsedUrl['scheme'].'://' : '';
-        $host = isset($parsedUrl['host']) ? $parsedUrl['host'] : '';
+        $host = $parsedUrl['host'] ?? '';
         $port = isset($parsedUrl['port']) ? ':'.$parsedUrl['port'] : '';
-        $user = isset($parsedUrl['user']) ? $parsedUrl['user'] : '';
+        $user = $parsedUrl['user'] ?? '';
         $pass = isset($parsedUrl['pass']) ? ':'.$parsedUrl['pass'] : '';
         $pass = ($user || $pass) ? "$pass@" : '';
-        $path = isset($parsedUrl['path']) ? $parsedUrl['path'] : '';
+        $path = $parsedUrl['path'] ?? '';
         $query = isset($parsedUrl['query']) ? '?'.http_build_query($parsedUrl['query']) : '';
         $fragment = isset($parsedUrl['fragment']) ? '#'.$parsedUrl['fragment'] : '';
 

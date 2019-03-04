@@ -12,8 +12,6 @@ declare(strict_types=1);
 
 namespace Eoko\Magento2\Client\Api\Operation;
 
-use HttpException;
-
 /**
  * API that can delete a resource.
  */
@@ -24,9 +22,7 @@ interface DeletableResourceInterface
      *
      * @param string $code code of the resource to delete
      *
-     * @throws HttpException
-     *
      * @return int status code 204 indicating that the resource has been well deleted
      */
-    public function delete($code);
+    public function delete($code): int;
 }

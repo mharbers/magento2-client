@@ -22,5 +22,5 @@ interface ResourceCursorInterface extends \Iterator
      *
      * @return int
      */
-    public function getLimit();
+    public function getLimit(): ?int;
 }

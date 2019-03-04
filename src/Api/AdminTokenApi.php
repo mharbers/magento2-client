@@ -19,7 +19,7 @@ use Eoko\Magento2\Client\Client\ResourceClient;
  */
 class AdminTokenApi implements AdminTokenApiInterface
 {
-    const TOKEN_URI = 'V1/integration/admin/token';
+    private const TOKEN_URI = 'V1/integration/admin/token';
 
     /** @var ResourceClient */
     private $resourceClient;

@@ -47,7 +47,7 @@ class Authentication implements AuthenticationInterface
      *
      * @return Authentication
      */
-    public static function fromPassword($clientId, $secret, $username, $password)
+    public static function fromPassword($clientId, $secret, $username, $password): Authentication
     {
         $authentication = new static();
         $authentication->clientId = $clientId;
@@ -66,7 +66,7 @@ class Authentication implements AuthenticationInterface
      *
      * @return Authentication
      */
-    public static function fromToken($clientId, $secret, $accessToken, $refreshToken)
+    public static function fromToken($clientId, $secret, $accessToken, $refreshToken): Authentication
     {
         $authentication = new static();
         $authentication->clientId = $clientId;
@@ -80,7 +80,7 @@ class Authentication implements AuthenticationInterface
     /**
      * @return string
      */
-    public function getClientId()
+    public function getClientId(): string
     {
         return $this->clientId;
     }
@@ -88,7 +88,7 @@ class Authentication implements AuthenticationInterface
     /**
      * @return string
      */
-    public function getSecret()
+    public function getSecret(): string
     {
         return $this->secret;
     }
@@ -96,7 +96,7 @@ class Authentication implements AuthenticationInterface
     /**
      * @return string
      */
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
@@ -104,7 +104,7 @@ class Authentication implements AuthenticationInterface
     /**
      * @return string
      */
-    public function getPassword()
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -120,7 +120,7 @@ class Authentication implements AuthenticationInterface
     /**
      * @return null|string
      */
-    public function getRefreshToken()
+    public function getRefreshToken(): ?string
     {
         return $this->refreshToken;
     }
@@ -130,7 +130,7 @@ class Authentication implements AuthenticationInterface
      *
      * @return Authentication
      */
-    public function setAccessToken($accessToken)
+    public function setAccessToken($accessToken): Authentication
     {
         $this->accessToken = $accessToken;
 
@@ -142,7 +142,7 @@ class Authentication implements AuthenticationInterface
      *
      * @return Authentication
      */
-    public function setRefreshToken($refreshToken)
+    public function setRefreshToken($refreshToken): Authentication
     {
         $this->refreshToken = $refreshToken;
 

@@ -25,5 +25,5 @@ interface ResourceCursorFactoryInterface
      *
      * @return ResourceCursorInterface
      */
-    public function createCursor($limit, PageInterface $firstPage);
+    public function createCursor($limit, PageInterface $firstPage): ResourceCursorInterface;
 }

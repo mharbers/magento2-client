@@ -12,8 +12,6 @@ declare(strict_types=1);
 
 namespace Eoko\Magento2\Client\Routing;
 
-use Psr\Http\Message\UriInterface;
-
 /**
  * Interface to generate a complete uri from a base path, uri parameters, and query parameters.
  */
@@ -26,7 +24,7 @@ interface UriGeneratorInterface
      * @param array  $uriParameters   List of the parameters to generate the endpoint
      * @param array  $queryParameters List of the query parameters added to the endpoint
      *
-     * @return UriInterface
+     * @return string
      */
-    public function generate($path, array $uriParameters = [], array $queryParameters = []);
+    public function generate($path, array $uriParameters = [], array $queryParameters = []): string;
 }

@@ -29,7 +29,7 @@ class SearchCriteria
     /**
      * @param int $pageSize
      */
-    public function setPageSize(int $pageSize)
+    public function setPageSize(int $pageSize): void
     {
         $this->pageSize = $pageSize;
     }
@@ -37,7 +37,7 @@ class SearchCriteria
     /**
      * @param int $currentPage
      */
-    public function setCurrentPage(int $currentPage)
+    public function setCurrentPage(int $currentPage): void
     {
         $this->currentPage = $currentPage;
     }
@@ -53,7 +53,7 @@ class SearchCriteria
     /**
      * @param SearchGroup[] $searchGroups
      */
-    public function setSearchGroups(array $searchGroups)
+    public function setSearchGroups(array $searchGroups): void
     {
         $this->searchGroups = $searchGroups;
     }
@@ -61,7 +61,7 @@ class SearchCriteria
     /**
      * @param SearchGroup $searchGroup
      */
-    public function addSearchGroup(SearchGroup $searchGroup)
+    public function addSearchGroup(SearchGroup $searchGroup): void
     {
         $this->searchGroups[] = $searchGroup;
     }
@@ -85,7 +85,7 @@ class SearchCriteria
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [
             'pageSize' => $this->pageSize,

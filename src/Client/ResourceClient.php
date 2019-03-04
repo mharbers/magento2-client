@@ -105,7 +105,7 @@ class ResourceClient implements ResourceClientInterface
     /**
      * {@inheritdoc}
      */
-    public function deleteResource($uri, array $uriParameters = [])
+    public function deleteResource($uri, array $uriParameters = []): int
     {
         $uri = $this->uriGenerator->generate($uri, $uriParameters);
 

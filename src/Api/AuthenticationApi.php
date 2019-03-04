@@ -17,7 +17,7 @@ use Eoko\Magento2\Client\Routing\UriGeneratorInterface;
 
 class AuthenticationApi implements AuthenticationApiInterface
 {
-    const TOKEN_URI = 'api/oauth/v1/token';
+    private const TOKEN_URI = 'api/oauth/v1/token';
 
     /** @var HttpClient */
     protected $httpClient;
@@ -71,7 +71,7 @@ class AuthenticationApi implements AuthenticationApiInterface
      *
      * @return array returns the body of the response containing access token and refresh token
      */
-    protected function authenticate($clientId, $secret, array $requestBody)
+    protected function authenticate($clientId, $secret, array $requestBody): array
     {
         $headers = [
             'Content-Type' => 'application/json',
@@ -82,8 +82,6 @@ class AuthenticationApi implements AuthenticationApiInterface
 
         $response = $this->httpClient->sendRequest('POST', $uri, $headers, json_encode($requestBody));
 
-        $responseBody = json_decode($response->getBody()->getContents(), true);
-
-        return $responseBody;
+        return json_decode($response->getBody()->getContents(), true);
     }
 }

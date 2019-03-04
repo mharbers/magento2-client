@@ -22,8 +22,8 @@ use Eoko\Magento2\Client\Search\SearchCriteria;
 
 class ProductApi implements ProductApiInterface
 {
-    const PRODUCTS_URI = 'V1/products';
-    const PRODUCT_URI = 'V1/products/%s';
+    private const PRODUCTS_URI = 'V1/products';
+    private const PRODUCT_URI = 'V1/products/%s';
 
     /** @var ResourceClientInterface */
     protected $resourceClient;
@@ -113,8 +113,8 @@ class ProductApi implements ProductApiInterface
     /**
      * {@inheritdoc}
      */
-    public function delete($sku)
+    public function delete($code): int
     {
-        return $this->resourceClient->deleteResource(static::PRODUCT_URI, [$sku]);
+        return $this->resourceClient->deleteResource(static::PRODUCT_URI, [$code]);
     }
 }

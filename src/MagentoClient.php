@@ -56,7 +56,7 @@ class MagentoClient implements MagentoClientInterface
     /**
      * {@inheritdoc}
      */
-    public function getToken()
+    public function getToken(): ?string
     {
         return $this->authentication->getAccessToken();
     }
@@ -64,7 +64,7 @@ class MagentoClient implements MagentoClientInterface
     /**
      * {@inheritdoc}
      */
-    public function getRefreshToken()
+    public function getRefreshToken(): ?string
     {
         return $this->authentication->getRefreshToken();
     }

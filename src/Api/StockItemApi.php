@@ -16,7 +16,7 @@ use Eoko\Magento2\Client\Client\ResourceClientInterface;
 
 class StockItemApi implements StockItemApiInterface
 {
-    const PRODUCT_STOCK_ITEMS_URI = 'V1/products/%s/stockItems/%s';
+    private const PRODUCT_STOCK_ITEMS_URI = 'V1/products/%s/stockItems/%s';
 
     /** @var ResourceClientInterface */
     protected $resourceClient;

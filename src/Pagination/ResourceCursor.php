@@ -54,7 +54,7 @@ class ResourceCursor implements ResourceCursorInterface
     /**
      * {@inheritdoc}
      */
-    public function next()
+    public function next(): void
     {
         ++$this->currentIndex;
         ++$this->totalIndex;
@@ -78,7 +78,7 @@ class ResourceCursor implements ResourceCursorInterface
     /**
      * {@inheritdoc}
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->totalIndex < $this->limit && isset($this->currentPage->getItems()[$this->currentIndex]);
     }
@@ -86,7 +86,7 @@ class ResourceCursor implements ResourceCursorInterface
     /**
      * {@inheritdoc}
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->totalIndex = 0;
         $this->currentIndex = 0;
@@ -96,7 +96,7 @@ class ResourceCursor implements ResourceCursorInterface
     /**
      * {@inheritdoc}
      */
-    public function getLimit()
+    public function getLimit(): ?int
     {
         return $this->limit;
     }

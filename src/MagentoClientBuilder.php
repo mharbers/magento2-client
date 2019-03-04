@@ -60,7 +60,7 @@ class MagentoClientBuilder
      *
      * @return MagentoClientBuilder
      */
-    public function setHttpClient(Client $httpClient)
+    public function setHttpClient(Client $httpClient): MagentoClientBuilder
     {
         $this->httpClient = $httpClient;
 
@@ -74,7 +74,7 @@ class MagentoClientBuilder
      *
      * @return MagentoClientBuilder
      */
-    public function setRequestFactory($requestFactory)
+    public function setRequestFactory($requestFactory): MagentoClientBuilder
     {
         $this->requestFactory = $requestFactory;
 
@@ -91,7 +91,7 @@ class MagentoClientBuilder
      *
      * @return MagentoClientInterface
      */
-    public function buildAuthenticatedByPassword($clientId, $secret, $username, $password)
+    public function buildAuthenticatedByPassword($clientId, $secret, $username, $password): MagentoClientInterface
     {
         $authentication = Authentication::fromPassword($clientId, $secret, $username, $password);
 
@@ -108,7 +108,7 @@ class MagentoClientBuilder
      *
      * @return MagentoClientInterface
      */
-    public function buildAuthenticatedByToken($clientId, $secret, $token, $refreshToken)
+    public function buildAuthenticatedByToken($clientId, $secret, $token, $refreshToken): MagentoClientInterface
     {
         $authentication = Authentication::fromToken($clientId, $secret, $token, $refreshToken);
 
@@ -120,9 +120,9 @@ class MagentoClientBuilder
      *
      * @return MagentoClientInterface
      */
-    public function buildAuthenticatedClient(AuthenticationInterface $authentication = null)
+    public function buildAuthenticatedClient(AuthenticationInterface $authentication = null): MagentoClientInterface
     {
-        list($resourceClient, $pageFactory, $cursorFactory) = $this->setUp($authentication);
+        [$resourceClient, $pageFactory, $cursorFactory] = $this->setUp($authentication);
 
         $client = new MagentoClient(
             $authentication,
@@ -139,13 +139,13 @@ class MagentoClientBuilder
      *
      * @return array
      */
-    protected function setUp(AuthenticationInterface $authentication = null)
+    protected function setUp(AuthenticationInterface $authentication = null): array
     {
         $uriGenerator = new UriGenerator($this->baseUri);
 
         $client = new HttpClient($this->getHttpClient(), $this->getRequestFactory());
 
-        if (is_null($authentication)) {
+        if ($authentication === null) {
             $httpClient = new UnauthenticatedHttpClient($client);
         } else {
             $authenticationApi = new AuthenticationApi($client, $uriGenerator);
@@ -166,7 +166,7 @@ class MagentoClientBuilder
     /**
      * @return Client
      */
-    private function getHttpClient()
+    private function getHttpClient(): Client
     {
         if (null === $this->httpClient) {
             $this->httpClient = HttpClientDiscovery::find();
@@ -178,7 +178,7 @@ class MagentoClientBuilder
     /**
      * @return RequestFactory
      */
-    private function getRequestFactory()
+    private function getRequestFactory(): RequestFactory
     {
         if (null === $this->requestFactory) {
             $this->requestFactory = MessageFactoryDiscovery::find();

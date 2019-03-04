@@ -29,7 +29,7 @@ class AdminAuthentication implements AuthenticationInterface
      *
      * @return AdminAuthentication
      */
-    public static function fromAdminToken(string $adminToken)
+    public static function fromAdminToken(string $adminToken): AdminAuthentication
     {
         $authentication = new static();
         $authentication->adminToken = $adminToken;

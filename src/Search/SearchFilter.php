@@ -16,21 +16,21 @@ use Eoko\Magento2\Client\Exception\NotAValidOperator;
 
 class SearchFilter
 {
-    const EQ = 'eq';
-    const FINSET = 'finset';
-    const FROM = 'from';
-    const GT = 'gt';
-    const GTEQ = 'gteq';
-    const IN = 'in';
-    const LIKE = 'like';
-    const LT = 'lt';
-    const LTEQ = 'lteq';
-    const MOREQ = 'moreq';
-    const NEQ = 'neq';
-    const NIN = 'nin';
-    const NOTNULL = 'notnull';
-    const NULL = 'null';
-    const TO = 'to';
+    public const EQ = 'eq';
+    public const FINSET = 'finset';
+    public const FROM = 'from';
+    public const GT = 'gt';
+    public const GTEQ = 'gteq';
+    public const IN = 'in';
+    public const LIKE = 'like';
+    public const LT = 'lt';
+    public const LTEQ = 'lteq';
+    public const MOREQ = 'moreq';
+    public const NEQ = 'neq';
+    public const NIN = 'nin';
+    public const NOTNULL = 'notnull';
+    public const NULL = 'null';
+    public const TO = 'to';
 
     public static $operators = [
         self::EQ => 'Equals',
@@ -74,7 +74,7 @@ class SearchFilter
         $this->conditionType = $conditionType;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'field' => $this->field,

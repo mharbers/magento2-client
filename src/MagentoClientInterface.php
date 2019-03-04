@@ -26,14 +26,14 @@ interface MagentoClientInterface
      *
      * @return null|string
      */
-    public function getToken();
+    public function getToken(): ?string;
 
     /**
      * Gets the authentication refresh token.
      *
      * @return null|string
      */
-    public function getRefreshToken();
+    public function getRefreshToken(): ?string;
 
     /**
      * Gets the product API.

@@ -22,7 +22,7 @@ class UnprocessableEntityHttpException extends ClientErrorHttpException
      *
      * @return array
      */
-    public function getResponseErrors()
+    public function getResponseErrors(): array
     {
         $responseBody = $this->response->getBody();
 
@@ -30,6 +30,6 @@ class UnprocessableEntityHttpException extends ClientErrorHttpException
         $decodedBody = json_decode($responseBody->getContents(), true);
         $responseBody->rewind();
 
-        return isset($decodedBody['errors']) ? $decodedBody['errors'] : [];
+        return $decodedBody['errors'] ?? [];
     }
 }

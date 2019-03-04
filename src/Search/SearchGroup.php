@@ -28,7 +28,7 @@ class SearchGroup
     /**
      * @param SearchFilter[] $filters
      */
-    public function setFilters(array $filters)
+    public function setFilters(array $filters): void
     {
         $this->filters = $filters;
     }
@@ -36,12 +36,12 @@ class SearchGroup
     /**
      * @param SearchFilter $filter
      */
-    public function addFilter(SearchFilter $filter)
+    public function addFilter(SearchFilter $filter): void
     {
         $this->filters[] = $filter;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         $array = [
             'filters' => [],

@@ -21,8 +21,8 @@ use Eoko\Magento2\Client\Search\SearchCriteria;
 
 class OrderApi implements OrderApiInterface
 {
-    const ORDERS_URI = 'V1/orders';
-    const ORDER_URI = 'V1/orders/%s';
+    private const ORDERS_URI = 'V1/orders';
+    private const ORDER_URI = 'V1/orders/%s';
 
     /** @var ResourceClientInterface */
     protected $resourceClient;

@@ -33,7 +33,7 @@ class UriGenerator implements UriGeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generate($path, array $uriParameters = [], array $queryParameters = [])
+    public function generate($path, array $uriParameters = [], array $queryParameters = []): string
     {
         $uriParameters = $this->encodeUriParameters($uriParameters);
 
@@ -59,7 +59,7 @@ class UriGenerator implements UriGeneratorInterface
      *
      * @return array
      */
-    protected function booleanQueryParametersAsString(array $queryParameters)
+    protected function booleanQueryParametersAsString(array $queryParameters): array
     {
         return array_map(function ($queryParameters) {
             if (!is_bool($queryParameters)) {
@@ -80,7 +80,7 @@ class UriGenerator implements UriGeneratorInterface
      *
      * @return array
      */
-    protected function encodeUriParameters(array $uriParameters)
+    protected function encodeUriParameters(array $uriParameters): array
     {
         return array_map(function ($uriParameter) {
             $uriParameter = rawurlencode($uriParameter);

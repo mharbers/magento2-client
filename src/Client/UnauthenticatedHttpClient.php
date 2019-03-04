@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace Eoko\Magento2\Client\Client;
 
-use Eoko\Magento2\Client\Security\Authentication;
 use Psr\Http\Message\ResponseInterface;
 
 /**

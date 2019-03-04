@@ -85,6 +85,6 @@ class HttpExceptionHandler
         $decodedBody = json_decode($responseBody->getContents(), true);
         $responseBody->rewind();
 
-        return isset($decodedBody['message']) ? $decodedBody['message'] : $response->getReasonPhrase();
+        return $decodedBody['message'] ?? $response->getReasonPhrase();
     }
 }

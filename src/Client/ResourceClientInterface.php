@@ -75,9 +75,7 @@ interface ResourceClientInterface
      * @param string $uri           URI of the resource to delete
      * @param array  $uriParameters URI parameters of the resource
      *
-     * @throws HttpException If the request failed
-     *
      * @return int Status code 204 indicating that the resource has been well deleted
      */
-    public function deleteResource($uri, array $uriParameters = []);
+    public function deleteResource($uri, array $uriParameters = []): int;
 }

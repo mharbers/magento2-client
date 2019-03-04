@@ -20,7 +20,7 @@ class ResourceCursorFactory implements ResourceCursorFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createCursor($limit, PageInterface $firstPage)
+    public function createCursor($limit, PageInterface $firstPage): ResourceCursorInterface
     {
         return new ResourceCursor($limit, $firstPage);
     }
