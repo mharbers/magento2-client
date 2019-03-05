@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Eoko\Magento2\Client\Api;
 
 use Eoko\Magento2\Client\Client\ResourceClientInterface;
+use Eoko\Magento2\Client\Exception\InvalidArgumentException;
 use Eoko\Magento2\Client\Pagination\PageFactoryInterface;
 use Eoko\Magento2\Client\Pagination\PageInterface;
 use Eoko\Magento2\Client\Pagination\ResourceCursorFactoryInterface;
@@ -23,6 +24,8 @@ class OrderApi implements OrderApiInterface
 {
     private const ORDERS_URI = 'V1/orders';
     private const ORDER_URI = 'V1/orders/%s';
+    private const ORDER_HOLD_URI = 'V1/orders/%s/hold';
+    private const ORDER_UNHOLD_URI = 'V1/orders/%s/unhold';
 
     /** @var ResourceClientInterface */
     protected $resourceClient;
@@ -80,5 +83,31 @@ class OrderApi implements OrderApiInterface
     public function get($orderId): array
     {
         return $this->resourceClient->getResource(static::ORDER_URI, [$orderId]);
+    }
+
+    public function update($code, array $data = []): array
+    {
+        if (array_key_exists('entity_id', $data)) {
+            throw new InvalidArgumentException('The parameter "entity_id" should not be defined in the data parameter');
+        }
+
+        $data = [
+            'entity' => array_merge(
+                ['entity_id'=>(string) $code],
+                $data
+            )
+        ];
+
+        return $this->resourceClient->createResource(static::ORDERS_URI, [], $data);
+    }
+
+    public function hold(int $entityId): bool
+    {
+        return $this->resourceClient->createResource(static::ORDER_HOLD_URI, [(string) $entityId])[0];
+    }
+
+    public function unhold(int $entityId): bool
+    {
+        return $this->resourceClient->createResource(static::ORDER_UNHOLD_URI, [(string) $entityId])[0];
     }
 }

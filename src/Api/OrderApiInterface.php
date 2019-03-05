@@ -14,7 +14,11 @@ namespace Eoko\Magento2\Client\Api;
 
 use Eoko\Magento2\Client\Api\Operation\GettableResourceInterface;
 use Eoko\Magento2\Client\Api\Operation\ListableResourceInterface;
+use Eoko\Magento2\Client\Api\Operation\UpdateblaInterface;
 
-interface OrderApiInterface extends GettableResourceInterface, ListableResourceInterface
+interface OrderApiInterface extends GettableResourceInterface, ListableResourceInterface, UpdateblaInterface
 {
+    public function hold(int $entityId): bool;
+
+    public function unhold(int $entityId): bool;
 }
