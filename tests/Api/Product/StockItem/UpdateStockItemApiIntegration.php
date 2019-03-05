@@ -21,7 +21,7 @@ class UpdateStockItemApiIntegration extends AbstractProductApiTestCase
         $item = $productApi->get('MH03-M-Blue')['extension_attributes']['stock_item'];
 
         // There is nothing interesting in response...
-        $api->update($item['item_id'], ['qty' => 42]);
+        $api->update($item['item_id'], ['qty' => '42']);
 
         $expected = $this->sanitizeStockItem($productApi->get('MH03-M-Blue')['extension_attributes']['stock_item']);
 

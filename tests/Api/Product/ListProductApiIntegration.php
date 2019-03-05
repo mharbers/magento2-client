@@ -11,12 +11,16 @@
 
 namespace Eoko\Magento2\Client\tests\Api\Product;
 
+use Eoko\Magento2\Client\Exception\BadRequestHttpException;
 use Eoko\Magento2\Client\Pagination\PageInterface;
 use Eoko\Magento2\Client\Pagination\ResourceCursorInterface;
+use Eoko\Magento2\Client\Search\SearchCriteria;
+use Eoko\Magento2\Client\Search\SearchFilter;
+use Eoko\Magento2\Client\Search\SearchGroup;
 
 class ListProductApiIntegration extends AbstractProductApiTestCase
 {
-    public function testListPerPage()
+    public function testListPerPage(): void
     {
         $api = $this->createClient()->getProductApi();
         $expectedProducts = $this->getExpectedProducts();
@@ -24,15 +28,14 @@ class ListProductApiIntegration extends AbstractProductApiTestCase
 
         $firstPage = $api->listPerPage();
 
-        $this->assertInstanceOf(PageInterface::class, $firstPage);
         $this->assertNull($firstPage->getPreviousLink());
         $this->assertNull($firstPage->getPreviousPage());
         $this->assertFalse($firstPage->hasPreviousPage());
         $this->assertTrue($firstPage->hasNextPage());
-        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=2', $firstPage->getNextLink());
+        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=10&searchCriteria%5BcurrentPage%5D=2', $firstPage->getNextLink());
 
         $firstPageProducts = $this->sanitizeProducts($firstPage->getItems());
-        $firstPageExpectedProducts = array_slice($expectedProducts, 0, 25);
+        $firstPageExpectedProducts = array_slice($expectedProducts, 0, 10);
 
         $this->assertSameContent($firstPageExpectedProducts, $firstPageProducts);
 
@@ -41,11 +44,11 @@ class ListProductApiIntegration extends AbstractProductApiTestCase
         $this->assertInstanceOf(PageInterface::class, $secondPage);
         $this->assertTrue($secondPage->hasPreviousPage());
         $this->assertTrue($secondPage->hasNextPage());
-        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=1', $secondPage->getPreviousLink());
-        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=3', $secondPage->getNextLink());
+        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=10&searchCriteria%5BcurrentPage%5D=1', $secondPage->getPreviousLink());
+        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=10&searchCriteria%5BcurrentPage%5D=3', $secondPage->getNextLink());
 
         $secondPageProducts = $this->sanitizeProducts($secondPage->getItems());
-        $secondPageExpectedProducts = array_slice($expectedProducts, 25, 25);
+        $secondPageExpectedProducts = array_slice($expectedProducts, 10, 10);
 
         $this->assertSameContent($secondPageExpectedProducts, $secondPageProducts);
 
@@ -58,36 +61,43 @@ class ListProductApiIntegration extends AbstractProductApiTestCase
         $this->assertFalse($lastPage->hasNextPage());
         $this->assertNull($lastPage->getNextPage());
         $this->assertNull($lastPage->getNextLink());
-        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=81', $lastPage->getPreviousLink());
+        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=10&searchCriteria%5BcurrentPage%5D=204', $lastPage->getPreviousLink());
 
         $products = $lastPage->getItems();
-        $this->assertCount(21, $products);
+        $this->assertCount(7, $products);
 
         $previousPage = $lastPage->getPreviousPage();
         $this->assertInstanceOf(PageInterface::class, $previousPage);
     }
 
-    public function testListPerPageWithSpecificQueryParameter()
+    public function testListPerPageWithSpecificQueryParameter(): void
     {
         $api = $this->createClient()->getProductApi();
         $expectedProducts = $this->getExpectedProducts();
         $baseUri = $this->getConfiguration()['magento2']['base_uri'];
 
-        $firstPage = $api->listPerPage(['foo' => 'bar']);
+        $searchCriteria = new SearchCriteria();
+        $searchGroup = new SearchGroup();
+        $searchGroup->addFilter(
+            new SearchFilter('status', '1', SearchFilter::EQ)
+        );
+        $searchCriteria->addSearchGroup($searchGroup);
+
+        $firstPage = $api->listPerPage($searchCriteria);
 
         $this->assertInstanceOf(PageInterface::class, $firstPage);
         $this->assertNull($firstPage->getPreviousLink());
         $this->assertNull($firstPage->getPreviousPage());
         $this->assertFalse($firstPage->hasPreviousPage());
         $this->assertTrue($firstPage->hasNextPage());
-        $this->assertSame($baseUri.'/V1/products?foo=bar&searchCriteria%5BpageSize%5D=25&searchCriteria%5BcurrentPage%5D=2', $firstPage->getNextLink());
+        $this->assertSame($baseUri.'/V1/products?searchCriteria%5BpageSize%5D=10&searchCriteria%5BcurrentPage%5D=2&searchCriteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bfield%5D=status&searchCriteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bvalue%5D=1&searchCriteria%5Bfilter_groups%5D%5B0%5D%5Bfilters%5D%5B0%5D%5Bcondition_type%5D=eq', $firstPage->getNextLink());
 
         $firstPageProducts = $this->sanitizeProducts($firstPage->getItems());
-        $firstPageExpectedProducts = array_slice($expectedProducts, 0, 25);
+        $firstPageExpectedProducts = array_slice($expectedProducts, 0, 10);
         $this->assertSameContent($firstPageExpectedProducts, $firstPageProducts);
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $api = $this->createClient()->getProductApi();
         $products = $api->all();
@@ -102,17 +112,19 @@ class ListProductApiIntegration extends AbstractProductApiTestCase
         $this->assertSameContent($expectedProducts, $products);
     }
 
-    public function testAllWithUselessQueryParameter()
+    public function testAllWithUselessQueryParameter(): void
     {
         $api = $this->createClient()->getProductApi();
-        $products = $api->all(10, ['foo' => 'bar']);
 
-        $this->assertInstanceOf(ResourceCursorInterface::class, $products);
+        $searchCriteria = new SearchCriteria();
+        $searchGroup = new SearchGroup();
+        $searchGroup->addFilter(
+            new SearchFilter('foo', 'bar', SearchFilter::EQ)
+        );
+        $searchCriteria->addSearchGroup($searchGroup);
 
-        $expectedProducts = array_slice($this->getExpectedProducts(), 0, 10);
-        $products = $this->sanitizeProducts(iterator_to_array($products));
-
-        $this->assertSameContent($expectedProducts, $products);
+        $this->expectException(BadRequestHttpException::class);
+        $api->all(10, $searchCriteria);
     }
 
     /**

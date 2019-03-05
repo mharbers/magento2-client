@@ -83,9 +83,10 @@ class Page implements PageInterface
         $this->previousLink = $prev ? $this->unparseUrl($parseUrl) : null;
 
         $nextQuery = $currentQuery;
-        $next = ($currentPage + 1) * $currentSize <= $count ? $currentPage + 1 : null;
+        $next = $currentPage * $currentSize <= $count ? $currentPage + 1 : null;
         $nextQuery['searchCriteria']['currentPage'] = $next;
         $parseUrl['query'] = $nextQuery;
+
         $this->nextLink = $next ? $this->unparseUrl($parseUrl) : null;
 
         $lastQuery = $currentQuery;
