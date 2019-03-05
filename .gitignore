@@ -1,2 +1,3 @@
 bin
 vendor
+tests/etc/parameters.yml
