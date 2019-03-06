@@ -23,7 +23,7 @@ final class ListOrderApiIntegration extends AbstractOrderApiTestCase
         $this->assertFalse($firstPage->hasPreviousPage());
         $this->assertFalse($firstPage->hasNextPage());
         $this->assertNull($firstPage->getNextLink());
-        $this->assertEquals(2, $firstPage->getCount());
+        $this->assertEquals(5, $firstPage->getCount());
     }
 
     public function testListPerPageWithSpecificQueryParameter(): void
@@ -34,7 +34,7 @@ final class ListOrderApiIntegration extends AbstractOrderApiTestCase
         $searchCriteria = new SearchCriteria();
         $searchGroup = new SearchGroup();
         $searchGroup->addFilter(
-            new SearchFilter('state', 'complete', SearchFilter::EQ)
+            new SearchFilter('state', 'closed', SearchFilter::EQ)
         );
         $searchCriteria->addSearchGroup($searchGroup);
 

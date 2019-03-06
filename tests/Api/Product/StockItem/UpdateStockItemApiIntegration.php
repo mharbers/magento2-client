@@ -20,12 +20,12 @@ class UpdateStockItemApiIntegration extends AbstractProductApiTestCase
 
         $item = $productApi->get('MH03-M-Blue')['extension_attributes']['stock_item'];
 
-        // There is nothing interesting in response...
-        $api->update($item['item_id'], ['qty' => '42']);
+        $stockQty = \random_int(10, 100);
+        $api->update((string) $item['item_id'], ['qty' => $stockQty]);
 
         $expected = $this->sanitizeStockItem($productApi->get('MH03-M-Blue')['extension_attributes']['stock_item']);
 
-        $this->assertSameContent(['qty' => 42], $expected);
+        $this->assertSameContent(['qty' => $stockQty], $expected);
     }
 
     public function sanitizeStockItem(array $product): array

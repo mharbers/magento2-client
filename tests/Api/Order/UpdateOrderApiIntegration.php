@@ -26,7 +26,7 @@ final class UpdateOrderApiIntegration extends AbstractOrderApiTestCase
 
     public function testItShouldToggleHoldOnAnOrder(): void
     {
-        $entityId = 3;
+        $entityId = 4;
         $api = $this->createClient()->getOrderApi();
 
         $this->assertTrue($api->hold($entityId));
@@ -45,8 +45,8 @@ final class UpdateOrderApiIntegration extends AbstractOrderApiTestCase
     private function getExpectedOrder(): array
     {
         return [
-            'entity_id' => 3,
-            'increment_id' => '000000003',
+            'entity_id' => 4,
+            'increment_id' => '000000004',
             'state' => 'processing',
             'status' => 'fraud',
         ];
