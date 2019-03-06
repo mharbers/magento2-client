@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -145,7 +146,7 @@ class MagentoClientBuilder
 
         $client = new HttpClient($this->getHttpClient(), $this->getRequestFactory());
 
-        if ($authentication === null) {
+        if (null === $authentication) {
             $httpClient = new UnauthenticatedHttpClient($client);
         } else {
             $authenticationApi = new AuthenticationApi($client, $uriGenerator);

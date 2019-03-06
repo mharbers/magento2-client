@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -24,14 +25,14 @@ interface MagentoClientInterface
     /**
      * Gets the authentication access token.
      *
-     * @return null|string
+     * @return string|null
      */
     public function getToken(): ?string;
 
     /**
      * Gets the authentication refresh token.
      *
-     * @return null|string
+     * @return string|null
      */
     public function getRefreshToken(): ?string;
 

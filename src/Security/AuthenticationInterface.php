@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -15,7 +16,7 @@ namespace Eoko\Magento2\Client\Security;
 interface AuthenticationInterface
 {
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getAccessToken(): ?string;
 }

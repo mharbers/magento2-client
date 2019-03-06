@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -38,7 +39,7 @@ class AdminAuthentication implements AuthenticationInterface
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getAccessToken(): ?string
     {

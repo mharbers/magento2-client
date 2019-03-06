@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -34,7 +35,7 @@ interface ListableResourceInterface
     /**
      * Gets a cursor to iterate over a list of resources.
      *
-     * @param int                 $limit The limit of returning values. Do note that the server has a maximum limit allowed.
+     * @param int                 $limit          The limit of returning values. Do note that the server has a maximum limit allowed.
      * @param SearchCriteria|null $searchCriteria
      *
      * @return ResourceCursorInterface

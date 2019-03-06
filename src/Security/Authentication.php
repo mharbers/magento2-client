@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -110,7 +111,7 @@ class Authentication implements AuthenticationInterface
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getAccessToken(): ?string
     {
@@ -118,7 +119,7 @@ class Authentication implements AuthenticationInterface
     }
 
     /**
-     * @return null|string
+     * @return string|null
      */
     public function getRefreshToken(): ?string
     {

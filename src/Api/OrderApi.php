@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /*
@@ -93,9 +94,9 @@ class OrderApi implements OrderApiInterface
 
         $data = [
             'entity' => array_merge(
-                ['entity_id'=>(string) $code],
+                ['entity_id' => (string) $code],
                 $data
-            )
+            ),
         ];
 
         return $this->resourceClient->createResource(static::ORDERS_URI, [], $data);
