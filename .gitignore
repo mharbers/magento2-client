@@ -3,3 +3,5 @@ vendor
 tests/etc/parameters.yml
 phpunit.xml
 .idea
+.php_cs.cache
+composer.lock

@@ -19,7 +19,7 @@ final class ListOrderCommentApiIntegration extends AbstractOrderApiTestCase
 {
     public function testUpdate()
     {
-        $api = $this->createClient()->getOrderApi()->getOrderCommentApi();
+        $api = $this->createClient()->getOrderCommentApi();
 
         $response = $api->update(
             '5', [

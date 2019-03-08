@@ -16,6 +16,7 @@ namespace Eoko\Magento2\Client;
 use Eoko\Magento2\Client\Api\AdminTokenApi;
 use Eoko\Magento2\Client\Api\AuthenticationApi;
 use Eoko\Magento2\Client\Api\OrderApi;
+use Eoko\Magento2\Client\Api\OrderCommentApi;
 use Eoko\Magento2\Client\Api\ProductApi;
 use Eoko\Magento2\Client\Client\AuthenticatedHttpClient;
 use Eoko\Magento2\Client\Client\HttpClient;
@@ -129,7 +130,8 @@ class MagentoClientBuilder
             $authentication,
             new AdminTokenApi($resourceClient),
             new ProductApi($resourceClient, $pageFactory, $cursorFactory),
-            new OrderApi($resourceClient, $pageFactory, $cursorFactory)
+            new OrderApi($resourceClient, $pageFactory, $cursorFactory),
+            new OrderCommentApi($resourceClient)
         );
 
         return $client;

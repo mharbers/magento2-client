@@ -19,8 +19,6 @@ use Eoko\Magento2\Client\Api\Operation\UpdateblaInterface;
 
 interface OrderApiInterface extends GettableResourceInterface, ListableResourceInterface, UpdateblaInterface
 {
-    public function getOrderCommentApi(): OrderCommentApi;
-
     public function hold(int $entityId): bool;
 
     public function unhold(int $entityId): bool;

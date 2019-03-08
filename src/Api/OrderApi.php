@@ -111,9 +111,4 @@ class OrderApi implements OrderApiInterface
     {
         return $this->resourceClient->createResource(static::ORDER_UNHOLD_URI, [(string) $entityId])[0];
     }
-
-    public function getOrderCommentApi(): OrderCommentApi
-    {
-        return new OrderCommentApi($this->resourceClient);
-    }
 }

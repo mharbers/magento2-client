@@ -15,6 +15,7 @@ namespace Eoko\Magento2\Client;
 
 use Eoko\Magento2\Client\Api\AdminTokenApiInterface;
 use Eoko\Magento2\Client\Api\OrderApiInterface;
+use Eoko\Magento2\Client\Api\OrderCommentApiInterface;
 use Eoko\Magento2\Client\Api\ProductApiInterface;
 
 /**
@@ -49,6 +50,13 @@ interface MagentoClientInterface
      * @return OrderApiInterface
      */
     public function getOrderApi(): OrderApiInterface;
+
+    /**
+     * Get the Order Comment API.
+     *
+     * @return OrderCommentApiInterface
+     */
+    public function getOrderCommentApi(): OrderCommentApiInterface;
 
     /**
      *  Gets the admin token API.
