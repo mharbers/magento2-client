@@ -1,3 +1,5 @@
 bin
 vendor
 tests/etc/parameters.yml
+phpunit.xml
+.idea
